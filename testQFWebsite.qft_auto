@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE RootStep>
+<RootStep id="_0" indentation="0" linelength="160" name="root" signature="FB6190543AB9F30EF78CA4C56FA9ED8D0C57CF71" version="7.1.3">
+<include>qfs.qft</include>
+<reference>qfs.qft</reference>
+<TestSet id="_1" name="verifyImprintLink">
+<TestCase id="_2" name="testLandingPage">
+<SetupSequence id="_6" name="Launch www.qf-test.com">
+<BasicSequence id="_7" name="Set global variables">
+<SetGlobalStep id="_8" varname="client">
+<default>www.qf-test.com</default>
+</SetGlobalStep>
+<SetGlobalStep id="_9" varname="browser">
+<default>chrome</default>
+</SetGlobalStep>
+<SetGlobalStep id="_A" varname="browserdir"/>
+</BasicSequence>
+<ClientWaiter client="$(client)" engine="web" id="_B" local="true" raise="false" resvarname="isSUTRunning" timeout="0">
+<comment>This node checks whether the SUT is already running. The result of this check will be stored in the variable isSUTRunning. The variable itself can contain true if SUT is already running or false if SUT is not running. This variable will be used in the following 'If' node.</comment>
+</ClientWaiter>
+<IfSequence id="_C" name="Launch SUT if not running" test="not $(isSUTRunning)">
+<BasicSequence id="_D" name="Start web engine">
+<BrowserClientStarter browser="$(browser)" client="$(client)" executable="${qftest:java}" id="_E" mozhome="$(browserdir)" openwindow="false"/>
+<ClientWaiter client="$(client)" engine="web" id="_F"/>
+</BasicSequence>
+<BasicSequence id="_G" name="Perform browser settings">
+<ProcedureCall id="_H" procedure="qfs.qft#qfs.web.browser.settings.doStartupSettings">
+<variable name="client">$(client)</variable>
+<variable name="browser">$(browser)</variable>
+<variable name="mozhome">$(browserdir)</variable>
+<variable name="emptyCache">true</variable>
+<variable name="enableCookies">true</variable>
+<variable name="deleteCookies">true</variable>
+<variable name="locale">en</variable>
+<variable name="enableProxy">false</variable>
+<variable name="proxyAddress"/>
+<variable name="proxyPort"/>
+<variable name="proxyAutoconfigurl"/>
+<variable name="enableProxyBypass">false</variable>
+<variable name="proxyBypass"/>
+<variable name="mozprofile"/>
+<variable name="compatibilitymode">no</variable>
+</ProcedureCall>
+</BasicSequence>
+<BasicSequence id="_I" name="Open browser window">
+<BrowserClientStarter browser="${default:browser:chrome}" client="$(client)" executable="${qftest:java}" id="_J" openwindow="true"
+                      url="http://www.qf-test.com/"/>
+<DocumentWaiter client="$(client)" component="genericDocument" id="_K" timeout="60000"/>
+</BasicSequence>
+<BasicSequence id="_L" name="Configure CustomWebResolver">
+<InstallCWRStep client="$(client)" engine="web" id="_M">
+<code>base: autodetect
+
+# Map DOM Nodes to Generic Classes
+# by CSS class, HTML attribute or HTML tag
+# 
+# Put the cursor next to "genericClasses" and
+# click the gutter icon to create a new mapping.
+genericClasses:
+
+# Generic Class Names or HTML tags for which to ignore nodes
+# when creating the parent hierarchy of a node
+ignoreTags:
+- &lt;DIV&gt;
+- &lt;SPAN&gt;
+</code>
+<comment>A CustomWebResolver allows you to translate the specifics of your web application's components into generic classes understood by QF-Test.
+This greatly improves component recognition and allows for more specific check types.
+
+The most important category is "genericClasses". Here, you can map HTML elements to generic classes by their HTML tag, CSS classes or HTML attributes.
+
+For additional information and examples, use "What's this?" in the step's context menu entry.</comment>
+</InstallCWRStep>
+</BasicSequence>
+</IfSequence>
+</SetupSequence>
+<TestStep id="_V" name="checkImprintLink">
+<ProcedureCall id="_Y" procedure="checkImprint"/>
+</TestStep>
+<CleanupSequence id="_O" name="Teardown">
+<WindowEventStep client="$(client)" component="qfs.de" event="WINDOW_CLOSING" id="_P"/>
+</CleanupSequence>
+</TestCase>
+</TestSet>
+<PackageRoot id="_3">
+<Procedure id="_X" name="checkImprint">
+<CheckStringStep client="$(client)" component="linkImprint" id="_W">
+<text>Imprint</text>
+</CheckStringStep>
+</Procedure>
+</PackageRoot>
+<ExtraSequence id="_4"/>
+<WindowList id="_5">
+<WebPageStep class="Window" feature="www.qfs.de" height="7383" id="qfs.de" uid="_N" width="1007">
+<extrafeature name="baseurl" negate="false" regexp="false" state="0">https://www.qfs.de/en/index.html</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">DOCUMENT</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Window</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">UI Test Automation Tool for Java, Web, Android &amp; Windows - QF-Test</extrafeature>
+<extrafeature name="qfs:labelTitle" negate="false" regexp="false" state="0">UI Test Automation Tool for Java, Web, Android &amp; Windows - QF-Test</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">DOCUMENT</extrafeature>
+<extrafeature name="title" negate="false" regexp="false" state="0">UI Test Automation Tool for Java, Web, Android &amp; Windows - QF-Test</extrafeature>
+<extrafeature name="url" negate="false" regexp="false" state="0">https://www.qfs.de/en/index.html</extrafeature>
+<ComponentStep class="HTML" classcount="1" classindex="0" id="qfs.de.html" uid="_Q">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">HTML</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">HTML</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">HTML</extrafeature>
+<ComponentStep class="BODY" classcount="1" classindex="0" id="qfs.de.body" uid="_R">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">BODY</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">BODY</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">BODY</extrafeature>
+<ComponentStep class="UL" classcount="20" classindex="17" height="32" id="qfs.de.ul" uid="_S" width="149" x="20" y="7969">
+<extrafeature name="class" negate="false" regexp="false" state="0">two-colums</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">UL</extrafeature>
+<ComponentStep class="LI" classcount="2" classindex="0" height="32" id="qfs.de.liImprint" uid="_T" width="70" x="0" y="0">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Imprint</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Imprint</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+<ComponentStep class="Link" classcount="1" classindex="0" feature="Imprint" height="22" id="linkImprint" uid="_U" width="60" x="0" y="5">
+<extrafeature name="href" negate="false" regexp="false" state="0">https://www.qfs.de/en/company/imprint.html</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Link</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Imprint</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Imprint</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">A</extrafeature>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+</WebPageStep>
+</WindowList>
+</RootStep>
