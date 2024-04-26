@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE RootStep>
-<RootStep id="_0" indentation="0" linelength="160" name="root" signature="D1ABF47CEA874002D65C2F115A5073A4C94FB1D6" version="7.1.3">
+<RootStep id="_0" indentation="0" linelength="160" name="root" signature="594CB3B03C6E7982FA2C9AD8065D6A5AAA323AB8" version="7.1.3">
 <include>qfs.qft</include>
 <reference>qfs.qft</reference>
-<TestSet id="_1" name="unnamed">
-<TestCase id="_2" name="unnamed"/>
-</TestSet>
-<PackageRoot id="_3"/>
-<ExtraSequence id="_4">
-<SetupSequence id="_6" name="Launch www.qf-test.com">
-<BasicSequence id="_7" name="Set global variables">
-<SetGlobalStep id="_8" varname="client">
+<TestSet id="_1" name="verifyGoToImprintPage">
+<SetupSequence id="_1m" name="Launch www.qf-test.com">
+<BasicSequence id="_1n" name="Set global variables">
+<SetGlobalStep id="_1o" varname="client">
 <default>www.qf-test.com</default>
 </SetGlobalStep>
-<SetGlobalStep id="_9" varname="browser">
+<SetGlobalStep id="_1p" varname="browser">
 <default>chrome</default>
 </SetGlobalStep>
-<SetGlobalStep id="_A" varname="browserdir"/>
+<SetGlobalStep id="_1q" varname="browserdir"/>
 </BasicSequence>
-<ClientWaiter client="$(client)" engine="web" id="_B" local="true" raise="false" resvarname="isSUTRunning" timeout="0">
+<ClientWaiter client="$(client)" engine="web" id="_1r" local="true" raise="false" resvarname="isSUTRunning" timeout="0">
 <comment>This node checks whether the SUT is already running. The result of this check will be stored in the variable isSUTRunning. The variable itself can contain true if SUT is already running or false if SUT is not running. This variable will be used in the following 'If' node.</comment>
 </ClientWaiter>
-<IfSequence id="_C" name="Launch SUT if not running" test="not $(isSUTRunning)">
-<BasicSequence id="_D" name="Start web engine">
-<BrowserClientStarter browser="$(browser)" client="$(client)" executable="${qftest:java}" id="_E" mozhome="$(browserdir)" openwindow="false"/>
-<ClientWaiter client="$(client)" engine="web" id="_F"/>
+<IfSequence id="_1s" name="Launch SUT if not running" test="not $(isSUTRunning)">
+<BasicSequence id="_1t" name="Start web engine">
+<BrowserClientStarter browser="$(browser)" client="$(client)" executable="${qftest:java}" id="_1u" mozhome="$(browserdir)" openwindow="false"/>
+<ClientWaiter client="$(client)" engine="web" id="_1v"/>
 </BasicSequence>
-<BasicSequence id="_G" name="Perform browser settings">
-<ProcedureCall id="_H" procedure="qfs.qft#qfs.web.browser.settings.doStartupSettings">
+<BasicSequence id="_1w" name="Perform browser settings">
+<ProcedureCall id="_1x" procedure="qfs.qft#qfs.web.browser.settings.doStartupSettings">
 <variable name="client">$(client)</variable>
 <variable name="browser">$(browser)</variable>
 <variable name="mozhome">$(browserdir)</variable>
@@ -45,13 +41,13 @@
 <variable name="compatibilitymode">no</variable>
 </ProcedureCall>
 </BasicSequence>
-<BasicSequence id="_I" name="Open browser window">
-<BrowserClientStarter browser="${default:browser:chrome}" client="$(client)" executable="${qftest:java}" id="_J" openwindow="true"
+<BasicSequence id="_1y" name="Open browser window">
+<BrowserClientStarter browser="${default:browser:chrome}" client="$(client)" executable="${qftest:java}" id="_1z" openwindow="true"
                       url="http://www.qf-test.com/"/>
-<DocumentWaiter client="$(client)" component="genericDocument" id="_K" timeout="60000"/>
+<DocumentWaiter client="$(client)" component="genericDocument" id="_1+" timeout="60000"/>
 </BasicSequence>
-<BasicSequence id="_L" name="Configure CustomWebResolver">
-<InstallCWRStep client="$(client)" engine="web" id="_M">
+<BasicSequence id="_1-" name="Configure CustomWebResolver">
+<InstallCWRStep client="$(client)" engine="web" id="_20">
 <code>base: autodetect
 
 # Map DOM Nodes to Generic Classes
@@ -77,6 +73,204 @@ For additional information and examples, use "What's this?" in the step's contex
 </BasicSequence>
 </IfSequence>
 </SetupSequence>
+<TestCase id="_v" name="testLandingPage">
+<TestStep id="_1B" name="checkLink">
+<ProcedureCall id="_1C" procedure="checkImprintLink"/>
+</TestStep>
+<TestStep id="_1D" name="clickLink">
+<ProcedureCall id="_1E" procedure="clickImprintLink"/>
+</TestStep>
+</TestCase>
+<TestCase id="_2" name="testProductFirstLevelPage">
+<TestStep id="_29" name="clickQFTestItem">
+<MouseEventStep clicks="1" client="$(client)" component="qfs.de.liProduct" event="MOUSE_MPRC" id="_2e" modifiers="16" x="44" y="34"/>
+</TestStep>
+<TestStep id="_V" name="checkLink">
+<ProcedureCall id="_Y" procedure="checkImprintLink"/>
+</TestStep>
+<TestStep id="_q" name="clickLink">
+<ProcedureCall id="_s" procedure="clickImprintLink"/>
+</TestStep>
+</TestCase>
+</TestSet>
+<PackageRoot id="_3">
+<Procedure id="_c" name="clickImprintLink">
+<MouseEventStep clicks="1" client="$(client)" component="linkImprint" event="MOUSE_MPRC" id="_d" modifiers="16"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_e" timeout="60000"/>
+</Procedure>
+<Procedure id="_X" name="checkImprintLink">
+<variable name="ImprintLinkText">Imprint</variable>
+<CheckStringStep client="$(client)" component="linkImprint" id="_W">
+<text>$(ImprintLinkText)</text>
+</CheckStringStep>
+</Procedure>
+</PackageRoot>
+<ExtraSequence id="_4">
+<MouseEventStep clicks="1" client="$(client)" component="linkQF-Test..." event="MOUSE_MPRC" id="_2B" modifiers="16"/>
+<CleanupSequence id="_2K" name="Teardown">
+<WindowEventStep client="$(client)" component="qfs.de" event="WINDOW_CLOSING" id="_2L"/>
+</CleanupSequence>
 </ExtraSequence>
-<WindowList id="_5"/>
+<WindowList id="_5">
+<WebPageStep class="Window" feature="www.qfs.de" height="7383" id="qfs.de" uid="_N" width="1007">
+<extrafeature name="baseurl" negate="false" regexp="false" state="0">https://www.qfs.de/en/index.html</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">DOCUMENT</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Window</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">UI Test Automation Tool for Java, Web, Android &amp; Windows - QF-Test</extrafeature>
+<extrafeature name="qfs:labelTitle" negate="false" regexp="false" state="0">UI Test Automation Tool for Java, Web, Android &amp; Windows - QF-Test</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">DOCUMENT</extrafeature>
+<extrafeature name="title" negate="false" regexp="false" state="0">UI Test Automation Tool for Java, Web, Android &amp; Windows - QF-Test</extrafeature>
+<extrafeature name="url" negate="false" regexp="false" state="0">https://www.qfs.de/en/index.html</extrafeature>
+<ComponentStep class="HTML" classcount="1" classindex="0" id="qfs.de.html" uid="_Q">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">HTML</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">HTML</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">HTML</extrafeature>
+<ComponentStep class="BODY" classcount="1" classindex="0" id="qfs.de.body" uid="_R">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">BODY</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">BODY</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">BODY</extrafeature>
+<ComponentStep class="UL" classcount="20" classindex="17" height="32" id="qfs.de.ul" uid="_S" width="149" x="20" y="7969">
+<extrafeature name="class" negate="false" regexp="false" state="0">two-colums</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">UL</extrafeature>
+<ComponentStep class="LI" classcount="2" classindex="0" height="32" id="qfs.de.liImprint" uid="_T" width="70" x="0" y="0">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Imprint</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Imprint</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+<ComponentStep class="Link" classcount="1" classindex="0" feature="Imprint" height="22" id="linkImprint" uid="_U" width="60" x="0" y="5">
+<extrafeature name="href" negate="false" regexp="false" state="0">https://www.qfs.de/en/company/imprint.html</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Link</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Imprint</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Imprint</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">A</extrafeature>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+<ComponentStep class="UL" classcount="12" classindex="0" height="804" id="qfs.de.ul2" uid="_1L" width="590" x="368" y="53">
+<extrafeature name="class" negate="false" regexp="false" state="0">list</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">UL</extrafeature>
+<ComponentStep class="LI" classcount="5" classindex="0" height="776"
+               id="qfs.de.liProduct_QF-Test_Quality_First!_The_GUI_testing_software_Java_Testing_Web_Testing_Windows_Testing_Android_Testing_PDF_Testing_Download_Download_the_latest_version_of_QF-Test_Pricing_Pricing_models_best_suited_for_your_projects_FAQ_Here_are_the_answers_Release_Notes___Roadmap_Get_started_How_to_get_started_with_QF-Test?"
+               uid="_1M" width="225" x="0" y="28">
+<extrafeature name="class" negate="false" regexp="false" state="0">list-item has-children</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Product QF-Test Quality First! The GUI testing software Java Testing Web Testing Windows Testing Android Testing PDF Testing Download Download the latest version of QF-Test Pricing Pricing models best suited for your projects FAQ Here are the answers Release Notes &amp; Roadmap Get started How to get started with QF-Test?</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Product QF-Test Quality First! The GUI testing software Java Testing Web Testing Windows Testing Android Testing PDF Testing Download Download the latest version of QF-Test Pricing Pricing models best suited for your projects FAQ Here are the answers Release Notes &amp; Roadmap Get started How to get started with QF-Test?</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+<ComponentStep class="UL" classcount="1" classindex="0" height="711" id="qfs.de.ul3" uid="_1N" width="352" x="49" y="65">
+<extrafeature name="class" negate="false" regexp="false" state="0">sublist-items</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">UL</extrafeature>
+<ComponentStep class="LI" classcount="6" classindex="0" height="300"
+               id="qfs.de.liQF-Test_Quality_First!_The_GUI_testing_software_Java_Testing_Web_Testing_Windows_Testing_Android_Testing_PDF_Testing" uid="_1O"
+               width="352" x="0" y="0">
+<extrafeature name="class" negate="false" regexp="false" state="0">sublist-item</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">QF-Test Quality First! The GUI testing software Java Testing Web Testing Windows Testing Android Testing PDF Testing</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">QF-Test Quality First! The GUI testing software Java Testing Web Testing Windows Testing Android Testing PDF Testing</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+<ComponentStep class="Link" classcount="1" classindex="0" feature="QF-Test..." height="75" id="linkQF-Test..." uid="_1P" width="352" x="0" y="0">
+<extrafeature name="class" negate="false" regexp="false" state="0">sublist-item-a</extrafeature>
+<extrafeature name="href" negate="false" regexp="false" state="0">https://www.qfs.de/en/product/qf-test.html</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Link</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="true" state="1">QF-Test Quality First! The GUI testing software</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="true" state="1">QF-Test Quality First! The GUI testing software</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">A</extrafeature>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+<ComponentStep class="LI" classcount="5" classindex="0" feature="qfs:labelText:Product" height="64" id="qfs.de.liProduct" uid="_2H" width="98" x="0" y="28">
+<extrafeature name="class" negate="false" regexp="false" state="0">list-item has-children</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="true" state="1">Product</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="true" state="1">Product</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+</ComponentStep>
+<ComponentStep class="LI" classcount="5" classindex="1" height="599"
+               id="qfs.de.liSupport_Documentation_QF-Test_described_comprehensively_Manual_Tutorial_Standard_Library_Blog_Product_support_Competent_and_fast_assistance_Training___Consulting_Starter_webinar___special_webinars_Videos_Get_to_know_QF-Test_in_action"
+               uid="_2O" width="226" x="98" y="28">
+<extrafeature name="class" negate="false" regexp="false" state="0">list-item has-children</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Support Documentation QF-Test described comprehensively Manual Tutorial Standard Library Blog Product support Competent and fast assistance Training &amp; Consulting Starter webinar &amp; special webinars Videos Get to know QF-Test in action</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Support Documentation QF-Test described comprehensively Manual Tutorial Standard Library Blog Product support Competent and fast assistance Training &amp; Consulting Starter webinar &amp; special webinars Videos Get to know QF-Test in action</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+</ComponentStep>
+</ComponentStep>
+<ComponentStep class="UL" classcount="19" classindex="0" height="804" id="qfs.de.ul4" uid="_24" width="590" x="729" y="53">
+<extrafeature name="class" negate="false" regexp="false" state="0">list</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">UL</extrafeature>
+<ComponentStep class="LI" classcount="5" classindex="0" height="776"
+               id="qfs.de.liProduct_QF-Test_Quality_First!_The_GUI_testing_software_Java_Testing_Web_Testing_Windows_Testing_Android_Testing_PDF_Testing_Download_Download_the_latest_version_of_QF-Test_Pricing_Pricing_models_best_suited_for_your_projects_FAQ_Here_are_the_answers_Release_Notes___Roadmap_Get_started_How_to_get_started_with_QF-Test?2"
+               uid="_25" width="225" x="0" y="28">
+<extrafeature name="class" negate="false" regexp="false" state="0">list-item has-children</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Product QF-Test Quality First! The GUI testing software Java Testing Web Testing Windows Testing Android Testing PDF Testing Download Download the latest version of QF-Test Pricing Pricing models best suited for your projects FAQ Here are the answers Release Notes &amp; Roadmap Get started How to get started with QF-Test?</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Product QF-Test Quality First! The GUI testing software Java Testing Web Testing Windows Testing Android Testing PDF Testing Download Download the latest version of QF-Test Pricing Pricing models best suited for your projects FAQ Here are the answers Release Notes &amp; Roadmap Get started How to get started with QF-Test?</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+<ComponentStep class="UL" classcount="1" classindex="0" height="711" id="qfs.de.ul5" uid="_26" width="352" x="49" y="65">
+<extrafeature name="class" negate="false" regexp="false" state="0">sublist-items</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">UL</extrafeature>
+<ComponentStep class="LI" classcount="6" classindex="0" height="300"
+               id="qfs.de.liQF-Test_Quality_First!_The_GUI_testing_software_Java_Testing_Web_Testing_Windows_Testing_Android_Testing_PDF_Testing2" uid="_27"
+               width="352" x="0" y="0">
+<extrafeature name="class" negate="false" regexp="false" state="0">sublist-item</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">QF-Test Quality First! The GUI testing software Java Testing Web Testing Windows Testing Android Testing PDF Testing</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">QF-Test Quality First! The GUI testing software Java Testing Web Testing Windows Testing Android Testing PDF Testing</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+<ComponentStep class="Link" classcount="1" classindex="0" feature="QF-Test" height="75" id="linkQF-Test...2" uid="_28" width="352" x="0" y="0">
+<extrafeature name="class" negate="false" regexp="false" state="0">sublist-item-a</extrafeature>
+<extrafeature name="href" negate="false" regexp="false" state="0">https://www.qfs.de/en/product/qf-test.html</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Link</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">QF-Test Quality First! The GUI testing software</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">QF-Test Quality First! The GUI testing software</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">A</extrafeature>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+<ComponentStep class="UL" classcount="20" classindex="0" height="804" id="qfs.de.ul6" uid="_2T" width="590" x="368" y="53">
+<extrafeature name="class" negate="false" regexp="false" state="0">list</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">UL</extrafeature>
+<ComponentStep class="LI" classcount="5" classindex="0" feature="Product" height="776"
+               id="qfs.de.liProduct_QF-Test_Quality_First!_The_GUI_testing_software_Java_Testing_Web_Testing_Windows_Testing_Android_Testing_PDF_Testing_Download_Download_the_latest_version_of_QF-Test_Pricing_Pricing_models_best_suited_for_your_projects_FAQ_Here_are_the_answers_Release_Notes___Roadmap_Get_started_How_to_get_started_with_QF-Test?3"
+               uid="_2U" width="225" x="0" y="28">
+<extrafeature name="class" negate="false" regexp="false" state="0">list-item has-children</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Product QF-Test Quality First! The GUI testing software Java Testing Web Testing Windows Testing Android Testing PDF Testing Download Download the latest version of QF-Test Pricing Pricing models best suited for your projects FAQ Here are the answers Release Notes &amp; Roadmap Get started How to get started with QF-Test?</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Product QF-Test Quality First! The GUI testing software Java Testing Web Testing Windows Testing Android Testing PDF Testing Download Download the latest version of QF-Test Pricing Pricing models best suited for your projects FAQ Here are the answers Release Notes &amp; Roadmap Get started How to get started with QF-Test?</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+</WebPageStep>
+</WindowList>
 </RootStep>
