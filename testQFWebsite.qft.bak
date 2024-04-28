@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE RootStep>
-<RootStep id="_0" indentation="0" linelength="160" name="root" signature="F0551A839D70311008CEBD568BB7FB7716927895" version="7.1.3">
+<RootStep id="_0" indentation="0" linelength="160" name="root" signature="74FF38C01CDEAAE3F05B6BA4B7FB47E86F567039" version="7.1.3">
 <include>qfs.qft</include>
 <reference>qfs.qft</reference>
 <TestSet id="_1" name="verifyGoToImprintPage">
+<Dependency id="_Af" name="Setup and Teardown">
 <SetupSequence id="_1m" name="Launch www.qf-test.com">
 <BasicSequence id="_1n" name="Set global variables">
 <SetGlobalStep id="_1o" varname="client">
@@ -82,44 +83,115 @@ For additional information and examples, use "What's this?" in the step's contex
 </BasicSequence>
 </IfSequence>
 </SetupSequence>
+<CleanupSequence id="_Ag" name="Teardown">
+<WindowEventStep client="$(client)" component="qfs.de" event="WINDOW_CLOSING" id="_Ah"/>
+</CleanupSequence>
+</Dependency>
 <TestCase id="_v" name="testLandingPage">
 <TestStep id="_1B" name="checkLink">
-<ProcedureCall id="_1C" procedure="checkImprintLink"/>
+<ProcedureCall id="_1C" procedure="checkAndClickImprintLink"/>
 </TestStep>
-<TestStep id="_1D" name="clickLink">
-<ProcedureCall id="_1E" procedure="clickImprintLink"/>
+<TestStep id="_1D" name="checkPage">
+<ProcedureCall id="_AK" procedure="Check Imprint Page"/>
 </TestStep>
 </TestCase>
 <TestCase id="_2" name="testProductFirstLevelPage">
-<TestStep id="_5R" name="Click on PRODUCT">
-<ProcedureCall id="_7p" procedure="Click menu link">
+<TestStep id="_5R" name="Click on QF-TEST">
+<ProcedureCall id="_92" procedure="Click product menu link">
 <variable name="label">Product</variable>
 <variable name="label1">QF-Test</variable>
 </ProcedureCall>
 </TestStep>
 <TestStep id="_V" name="checkLink">
-<ProcedureCall id="_Y" procedure="checkImprintLink"/>
+<ProcedureCall id="_Y" procedure="checkAndClickImprintLink"/>
 </TestStep>
-<TestStep id="_q" name="clickLink">
-<ProcedureCall id="_s" procedure="clickImprintLink"/>
+<TestStep id="_AN" name="checkPage">
+<ProcedureCall id="_AO" procedure="Check Imprint Page"/>
+</TestStep>
+</TestCase>
+<TestCase disabled="true" id="_7-" name="testSupportFirstLevelPage" postdelay="5000">
+<TestStep id="_80" name="Click on Documentation">
+<ProcedureCall id="_8f" procedure="Click support menu link"/>
+</TestStep>
+<TestStep id="_9f" name="checkLink">
+<ProcedureCall disabled="true" id="_9z" procedure="checkImprintLink2">
+<variable name="ImprintLinkText">Imprint</variable>
+</ProcedureCall>
+<ProcedureCall id="_9g" procedure="checkAndClickImprintLink"/>
+</TestStep>
+<TestStep id="_AR" name="checkPage">
+<ProcedureCall id="_AS" procedure="Check Imprint Page"/>
+</TestStep>
+</TestCase>
+<TestCase disabled="true" id="_8i" name="testSolutionsFirstLevelPage">
+<TestStep id="_8j" name="Click on Test automation basics">
+<ProcedureCall id="_91" procedure="Click solutions menu link"/>
+</TestStep>
+<TestStep id="_8l" name="checkLink">
+<ProcedureCall id="_9a" procedure="checkAndClickImprintLink"/>
+</TestStep>
+<TestStep id="_AV" name="checkPage">
+<ProcedureCall id="_AW" procedure="Check Imprint Page"/>
+</TestStep>
+</TestCase>
+<TestCase id="_8N" name="testCompanyFirstLevelPage">
+<TestStep id="_8O" name="Click on Company">
+<ProcedureCall id="_93" procedure="Click company menu link"/>
+</TestStep>
+<TestStep id="_8Q" name="clickkLink">
+<ProcedureCall id="_8R" procedure="checkAndClickImprintLink"/>
+</TestStep>
+<TestStep id="_AZ" name="checkPage">
+<ProcedureCall id="_Aa" procedure="Check Imprint Page"/>
 </TestStep>
 </TestCase>
 </TestSet>
 <PackageRoot id="_3">
-<Procedure id="_73" name="Click menu link">
+<Procedure id="_AI" name="Check Imprint Page">
+<CheckStringStep client="$(client)" component="h1Imprint" id="_AJ" predelay="5000">
+<text>Imprint</text>
+</CheckStringStep>
+</Procedure>
+<Procedure id="_8x" name="Click solutions menu link">
+<MouseEventStep clicks="1" client="$(client)" component="genericSolutionsLink" event="MOUSE_MPRC" id="genericSolutionsLink" modifiers="16" uid="_8y"/>
+<MouseEventStep clicks="1" client="$(client)" component="genericTestAutoBasicMenuItem" event="MOUSE_MPRC" id="genericTestAutoBasicMenuItem" modifiers="16"
+                uid="_8z"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_9E" timeout="60000"/>
+</Procedure>
+<Procedure id="_8I" name="Click company menu link">
+<MouseEventStep clicks="1" client="$(client)" component="genericCompanyLink" event="MOUSE_MPRC" id="genericCompanyLink" modifiers="16" uid="_8J"/>
+<MouseEventStep clicks="1" client="$(client)" component="genericAboutUsMenuItem" event="MOUSE_MPRC" id="genericAboutUsMenuItem" modifiers="16" uid="_8K"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_8Z" timeout="60000"/>
+</Procedure>
+<Procedure id="_86" name="Click support menu link">
+<variable name="Documentation">Documentation</variable>
+<variable name="Support">Support</variable>
+<MouseEventStep clicks="1" client="$(client)" component="genericSupportLink" event="MOUSE_MPRC" id="genericSupportLink" modifiers="16" uid="_87"/>
+<MouseEventStep clicks="1" client="$(client)" component="genericDocumentationMenuItem" event="MOUSE_MPRC" id="genericDocumentationMenuItem" modifiers="16"
+                uid="_88"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_8e" timeout="60000"/>
+</Procedure>
+<Procedure id="_73" name="Click product menu link">
 <variable name="label">Product</variable>
 <variable name="label1">QF-Test</variable>
 <MouseEventStep clicks="1" client="$(client)" component="genericLink" event="MOUSE_MPRC" id="genericLink" modifiers="16" uid="_74"/>
-<MouseEventStep clicks="1" client="$(client)" component="1LevelMenuItem" event="MOUSE_MPRC" id="1LevelMenuItem" modifiers="16" uid="_7m"/>
+<MouseEventStep clicks="1" client="$(client)" component="genericMenuItem1" event="MOUSE_MPRC" id="genericMenuItem1" modifiers="16" uid="_7m"/>
 <DocumentWaiter client="$(client)" component="qfs.de" id="_7x" timeout="60000"/>
 </Procedure>
 <Procedure id="_c" name="clickImprintLink">
 <MouseEventStep clicks="1" client="$(client)" component="linkImprint" event="MOUSE_MPRC" id="_d" modifiers="16"/>
 <DocumentWaiter client="$(client)" component="qfs.de" id="_e" timeout="60000"/>
 </Procedure>
-<Procedure id="_X" name="checkImprintLink">
+<Procedure id="_X" name="checkAndClickImprintLink">
 <variable name="ImprintLinkText">Imprint</variable>
 <CheckStringStep client="$(client)" component="linkImprint" id="_W">
+<text>$(ImprintLinkText)</text>
+</CheckStringStep>
+<MouseEventStep clicks="1" client="$(client)" component="linkImprint" event="MOUSE_MPRC" id="_A8" modifiers="16"/>
+</Procedure>
+<Procedure id="_9X" name="checkImprintLink2">
+<variable name="ImprintLinkText">Imprint</variable>
+<CheckStringStep client="$(client)" component="linkImprint2" id="_9Y">
 <text>$(ImprintLinkText)</text>
 </CheckStringStep>
 </Procedure>
@@ -145,9 +217,6 @@ resolvers.addResolver("ListItemTextResolver", getName)</code>
 <ClientScriptStep client="$(client)" id="_5E" name="GetAllResolvers">
 <code>print resolvers.listNames()</code>
 </ClientScriptStep>
-<CleanupSequence id="_2K" name="Teardown">
-<WindowEventStep client="$(client)" component="qfs.de" event="WINDOW_CLOSING" id="_2L"/>
-</CleanupSequence>
 <BasicSequence id="_6r" name="Recorded 4/27/24, 12:55 PM">
 <ClientScriptStep client="$(client)" id="_6u" name="Test">
 <code># Import necessary modules
@@ -171,11 +240,24 @@ res.click()  # For example, click on the element
 <variable name="label">Product</variable>
 <variable name="label">QF-Test</variable>
 <MouseEventStep clicks="1" client="$(client)" component="genericLink" event="MOUSE_MPRC" id="genericLink" modifiers="16" uid="_7o"/>
-<MouseEventStep clicks="1" client="$(client)" component="1LevelMenuItem" event="MOUSE_MPRC" id="1LevelMenuItem" modifiers="16" uid="_7n"/>
+<MouseEventStep clicks="1" client="$(client)" component="genericMenuItem1" event="MOUSE_MPRC" id="1LevelMenuItem" modifiers="16" uid="_7n"/>
 </BasicSequence>
 <BasicSequence id="_7q" name="Recorded 4/28/24, 12:59 PM">
 <MouseEventStep clicks="1" client="$(client)" component="QF-Test...15" event="MOUSE_MPRC" id="_7r" modifiers="16"/>
 <DocumentWaiter client="$(client)" component="qfs.de" id="_7s" timeout="60000"/>
+</BasicSequence>
+<BasicSequence id="_97" name="Recorded 4/28/24, 4:38 PM">
+<MouseEventStep clicks="1" client="$(client)" component="#Support" event="MOUSE_MPRC" id="_9l" modifiers="16"/>
+<MouseEventStep clicks="1" client="$(client)" component="#Documentation" event="MOUSE_MPRC" id="_98" modifiers="16"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_99" timeout="60000"/>
+</BasicSequence>
+<BasicSequence id="_9x" name="Recorded 4/28/24, 5:51 PM">
+<CheckStringStep client="$(client)" component="linkImprint2" id="_9y">
+<text>Imprint</text>
+</CheckStringStep>
+</BasicSequence>
+<BasicSequence id="_Am" name="Recorded 4/28/24, 6:55 PM">
+<WindowEventStep client="$(client)" component="qfs.de" event="WINDOW_CLOSING" id="_An"/>
 </BasicSequence>
 </ExtraSequence>
 <WindowList id="_5">
@@ -196,10 +278,31 @@ res.click()  # For example, click on the element
 <extrafeature name="qfs:class" negate="false" regexp="false" state="0">BODY</extrafeature>
 <extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">BODY</extrafeature>
 <extrafeature name="tag" negate="false" regexp="false" state="0">BODY</extrafeature>
+<ComponentStep class="Link" id="genericSolutionsLink" uid="_8-">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://a[contains(text(),'Solutions')]}</extrafeature>
+<ComponentStep class="DIV" id="genericTestAutoBasicMenuItem" uid="_90">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='Test automation basics']}</extrafeature>
+</ComponentStep>
+</ComponentStep>
+<ComponentStep class="Link" id="genericCompanyLink" uid="_8C">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://a[contains(text(),'Company')]}</extrafeature>
+<ComponentStep class="DIV" id="genericAboutUsMenuItem" uid="_8D">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='About us']}</extrafeature>
+</ComponentStep>
+</ComponentStep>
+<ComponentStep class="Link" id="genericSupportLink" uid="_89">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://a[contains(text(),'Support')]}</extrafeature>
+<extrafeature name="qfs:label" negate="false" regexp="false" state="2">$(Support)</extrafeature>
+<ComponentStep class="DIV" id="genericDocumentationMenuItem" uid="_8A">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://li//div[contains(text(),'Documentation')]}</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">$(Documentation)</extrafeature>
+</ComponentStep>
+</ComponentStep>
 <ComponentStep class="Link" id="genericLink" uid="_7O">
 <extrafeature name="qfs:label" negate="false" regexp="false" state="2">$(label)</extrafeature>
-<ComponentStep class="DIV" id="1LevelMenuItem" uid="_7h">
-<extrafeature name="qfs:label" negate="false" regexp="false" state="2">$(label1)</extrafeature>
+<ComponentStep class="DIV" id="genericMenuItem1" uid="_7h">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='QF-Test']}</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">$(label1)</extrafeature>
 </ComponentStep>
 </ComponentStep>
 <ComponentStep class="UL" classcount="20" classindex="17" height="32" id="qfs.de.ul" uid="_S" width="149" x="20" y="7969">
@@ -217,8 +320,9 @@ res.click()  # For example, click on the element
 <extrafeature name="href" negate="false" regexp="false" state="0">https://www.qfs.de/en/company/imprint.html</extrafeature>
 <extrafeature name="qfs:class" negate="false" regexp="false" state="0">A</extrafeature>
 <extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Link</extrafeature>
+<extrafeature name="qfs:item" negate="false" regexp="false" state="0">@:xpath=${quoteitem://div[normalize-space()='Imprint']}</extrafeature>
 <extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Imprint</extrafeature>
-<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Imprint</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">Imprint</extrafeature>
 <extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">A</extrafeature>
 <extrafeature name="tag" negate="false" regexp="false" state="0">A</extrafeature>
 </ComponentStep>
@@ -283,6 +387,67 @@ res.click()  # For example, click on the element
 <extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Support Documentation QF-Test described comprehensively Manual Tutorial Standard Library Blog Product support Competent and fast assistance Training &amp; Consulting Starter webinar &amp; special webinars Videos Get to know QF-Test in action</extrafeature>
 <extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
 <extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+<ComponentStep class="UL" classcount="1" classindex="0" height="534" id="qfs.de.ul7" uid="_94" width="352" x="50" y="65">
+<extrafeature name="class" negate="false" regexp="false" state="0">sublist-items</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">UL</extrafeature>
+<ComponentStep class="LI" classcount="4" classindex="0" height="255"
+               id="qfs.de.liDocumentation_QF-Test_described_comprehensively_Manual_Tutorial_Standard_Library_Blog" uid="_95" width="352" x="0" y="0">
+<extrafeature name="class" negate="false" regexp="false" state="0">sublist-item</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Documentation QF-Test described comprehensively Manual Tutorial Standard Library Blog</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Documentation QF-Test described comprehensively Manual Tutorial Standard Library Blog</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+<ComponentStep class="Link" classcount="1" classindex="0" feature="Documentation..." height="75" id="linkDocumentation..." uid="_96" width="352" x="0" y="0">
+<extrafeature name="class" negate="false" regexp="false" state="0">sublist-item-a</extrafeature>
+<extrafeature name="href" negate="false" regexp="false" state="0">https://www.qfs.de/en/support/documentation.html</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Link</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Documentation QF-Test described comprehensively</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Documentation QF-Test described comprehensively</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">A</extrafeature>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+<ComponentStep class="LI" classcount="5" classindex="2" height="290"
+               id="qfs.de.liSolutions_Test_automation_basics_Things_to_know_about_software_testing_Types_of_tests_Which_techniques_does_QF-Test_use?_Industries_QF-Test_as_proven_solution"
+               uid="_9F" width="231" x="198" y="28">
+<extrafeature name="class" negate="false" regexp="false" state="0">list-item has-children beforeButtonSecoundLevel</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Solutions Test automation basics Things to know about software testing Types of tests Which techniques does QF-Test use? Industries QF-Test as proven solution</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Solutions Test automation basics Things to know about software testing Types of tests Which techniques does QF-Test use? Industries QF-Test as proven solution</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+<ComponentStep class="UL" classcount="1" classindex="0" height="225" id="qfs.de.ul8" uid="_9G" width="352" x="55" y="65">
+<extrafeature name="class" negate="false" regexp="false" state="0">sublist-items</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">UL</extrafeature>
+<ComponentStep class="LI" classcount="3" classindex="0" height="75" id="qfs.de.liTest_automation_basics_Things_to_know_about_software_testing" uid="_9H"
+               width="352" x="0" y="0">
+<extrafeature name="class" negate="false" regexp="false" state="0">sublist-item</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Test automation basics Things to know about software testing</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Test automation basics Things to know about software testing</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+<ComponentStep class="Link" classcount="1" classindex="0" feature="Test automation basics..." height="75" id="linkTest_automation_basics..." uid="_9I"
+               width="352" x="0" y="0">
+<extrafeature name="class" negate="false" regexp="false" state="0">sublist-item-a</extrafeature>
+<extrafeature name="href" negate="false" regexp="false" state="0">https://www.qfs.de/en/solutions/test-automation-basics.html</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Link</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Test automation basics Things to know about software testing</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Test automation basics Things to know about software testing</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">A</extrafeature>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
 </ComponentStep>
 </ComponentStep>
 <ComponentStep class="UL" classcount="19" classindex="0" height="804" id="qfs.de.ul4" uid="_24" width="590" x="729" y="53">
@@ -543,6 +708,33 @@ res.click()  # For example, click on the element
 </ComponentStep>
 </ComponentStep>
 </ComponentStep>
+</ComponentStep>
+<ComponentStep class="UL" classcount="12" classindex="9" height="32" id="qfs.de.ul9" uid="_9J" width="149" x="279" y="1932">
+<extrafeature name="class" negate="false" regexp="false" state="0">two-colums</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">UL</extrafeature>
+<ComponentStep class="LI" classcount="2" classindex="0" height="32" id="qfs.de.liImprint2" uid="_9K" width="70" x="0" y="0">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Imprint</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Imprint</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+<ComponentStep class="Link" classcount="1" classindex="0" feature="Imprint" height="22" id="linkImprint2" uid="_9L" width="60" x="0" y="5">
+<extrafeature name="href" negate="false" regexp="false" state="0">https://www.qfs.de/en/company/imprint.html</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Link</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Imprint</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Imprint</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">A</extrafeature>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+<ComponentStep class="H1" classcount="1" classindex="0" feature="Imprint" height="55" id="h1Imprint" uid="_AH" width="1120" x="199" y="212">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">H1</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">H1</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">H1</extrafeature>
 </ComponentStep>
 </ComponentStep>
 </ComponentStep>
