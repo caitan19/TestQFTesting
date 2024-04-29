@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE RootStep>
-<RootStep id="_0" indentation="0" linelength="160" name="root" signature="75FAEADC69FE8157CCD70D50840960E7ED7B1BEB" version="7.1.3">
+<RootStep id="_0" indentation="0" linelength="160" name="root" signature="8B4316AF57BC79299FDE816C9FC3700A6AD48246" version="7.1.3">
 <include>qfs.qft</include>
 <reference>qfs.qft</reference>
-<TestSet id="_1" name="verifyGoToImprintPage">
 <Dependency id="_Af" name="Setup and Teardown">
 <SetupSequence id="_1m" name="Launch www.qf-test.com">
 <BasicSequence id="_1n" name="Set global variables">
@@ -87,126 +86,240 @@ For additional information and examples, use "What's this?" in the step's contex
 <WindowEventStep client="$(client)" component="qfs.de" event="WINDOW_CLOSING" id="_Ah"/>
 </CleanupSequence>
 </Dependency>
-<TestCase id="_v" name="testLandingPage">
-<TestStep id="_1B" name="checkLink">
-<ProcedureCall id="_B6" procedure="checkImprintLinkAndClick">
+<TestSet id="_Cg" name="testFirstLevelPages">
+<TestCase id="_C0" name="testHomePage">
+<TestStep id="_G7" name="Click accept">
+<MouseEventStep clicks="1" client="$(client)" component="ACCEPT_Link" event="MOUSE_MPRC" id="_GA" modifiers="16"/>
+</TestStep>
+<TestStep id="_FN" name="checkImprintLinkAndPage">
+<ProcedureCall id="_FO" procedure="Check Imprint Link and Page">
 <variable name="imprintText">Imprint</variable>
 </ProcedureCall>
-<ProcedureCall disabled="true" id="_1C" procedure="checkAndClickImprintLink"/>
-</TestStep>
-<TestStep id="_1D" name="checkPage">
-<ProcedureCall id="_AK" procedure="Check Imprint Page"/>
 </TestStep>
 </TestCase>
-<TestCase id="_2" name="testProductFirstLevelPage">
-<TestStep id="_5R" name="Click on QF-TEST">
-<ProcedureCall id="_92" procedure="Click product menu link">
-<variable name="label">Product</variable>
-<variable name="label1">QF-Test</variable>
-</ProcedureCall>
+<TestCase id="_1" name="verifyProductPages">
+<TestStep id="_BM" name="Click on QF-TEST">
+<ProcedureCall id="_BN" procedure="Click product menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="QF_Test_Menu_Item" event="MOUSE_MPRC" id="QF_Test_Menu_Item" modifiers="16" uid="_BO"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_BP" timeout="60000"/>
 </TestStep>
-<TestStep id="_V" name="checkLink">
-<ProcedureCall id="_B7" procedure="checkImprintLinkAndClick">
+<TestStep id="_Dm" name="checkImprintLinkAndPage">
+<ProcedureCall id="_Dn" procedure="Check Imprint Link and Page">
 <variable name="imprintText">Imprint</variable>
 </ProcedureCall>
-<ProcedureCall disabled="true" id="_Y" procedure="checkAndClickImprintLink"/>
 </TestStep>
-<TestStep id="_AN" name="checkPage">
-<ProcedureCall id="_AO" procedure="Check Imprint Page"/>
+<TestStep id="_5R" name="Click on Download">
+<ProcedureCall id="_92" procedure="Click product menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Download_Menu_Item" event="MOUSE_MPRC" id="Download_Menu_Item" modifiers="16" uid="_B8"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_B9" timeout="60000"/>
+</TestStep>
+<TestStep id="_Do" name="checkImprintLinkAndPage">
+<ProcedureCall id="_Dp" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+</TestStep>
+<TestStep id="_C2" name="Click on Pricing">
+<ProcedureCall id="_C3" procedure="Click product menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Pricing_Menu_Item" event="MOUSE_MPRC" id="Pricing_Menu_Item" modifiers="16" uid="_C4"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_C5" timeout="60000"/>
+</TestStep>
+<TestStep id="_Dq" name="checkImprintLinkAndPage">
+<ProcedureCall id="_Dr" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+</TestStep>
+<TestStep id="_CC" name="Click on FAQ">
+<ProcedureCall id="_CD" procedure="Click product menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="FAQ_Menu_Item" event="MOUSE_MPRC" id="FAQ_Menu_Item" modifiers="16" uid="_CE"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_CF" timeout="60000"/>
+</TestStep>
+<TestStep id="_Ds" name="checkImprintLinkAndPage">
+<ProcedureCall id="_Dt" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+</TestStep>
+<TestStep id="_CM" name="Click on Release Notes">
+<ProcedureCall id="_CN" procedure="Click product menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Release_Notes_Menu_Item" event="MOUSE_MPRC" id="Release_Notes_Menu_Item" modifiers="16" uid="_CO"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_CP" timeout="60000"/>
+</TestStep>
+<TestStep id="_Du" name="checkImprintLinkAndPage">
+<ProcedureCall id="_Dv" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+</TestStep>
+<TestStep id="_CW" name="Click on Getting started">
+<ProcedureCall id="_CX" procedure="Click product menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Getting_Started_Menu_Item" event="MOUSE_MPRC" id="Getting_Started_Menu_Item" modifiers="16" uid="_CY"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_CZ" timeout="60000"/>
+</TestStep>
+<TestStep id="_Dw" name="checkImprintLinkAndPage">
+<ProcedureCall id="_Dx" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
 </TestStep>
 </TestCase>
-<TestCase id="_7-" name="testSupportFirstLevelPage" postdelay="5000">
+<TestCase id="_Bz" name="verifySupportPages">
 <TestStep id="_80" name="Click on Documentation">
 <ProcedureCall id="_8f" procedure="Click support menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Documentation_MenuI_Item" event="MOUSE_MPRC" id="Documentation_MenuI_Item" modifiers="16" uid="_88"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_8e" timeout="60000"/>
 </TestStep>
-<TestStep id="_9f" name="checkLink">
-<ProcedureCall id="_9z" procedure="checkImprintLinkAndClick">
+<TestStep id="_Dc" name="checkImprintLinkAndPage">
+<ProcedureCall id="_Dd" procedure="Check Imprint Link and Page">
 <variable name="imprintText">Imprint</variable>
 </ProcedureCall>
-<ProcedureCall disabled="true" id="_9g" procedure="checkAndClickImprintLink"/>
 </TestStep>
-<TestStep id="_AR" name="checkPage">
-<ProcedureCall id="_AS" procedure="Check Imprint Page"/>
+<TestStep id="_Ci" name="Click on Product Support">
+<ProcedureCall id="_Cj" procedure="Click support menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Product_Support_MenuI_Item" event="MOUSE_MPRC" id="Product_Support_MenuI_Item" modifiers="16"
+                uid="_Cp"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_Cq" timeout="60000"/>
+</TestStep>
+<TestStep id="_Dg" name="checkImprintLinkAndPage">
+<ProcedureCall id="_Dh" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+</TestStep>
+<TestStep id="_Cs" name="Click on Training &amp; Consulting">
+<ProcedureCall id="_Ct" procedure="Click support menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Training_Menu_Item" event="MOUSE_MPRC" id="Training_Menu_Item" modifiers="16" uid="_Cu"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_Cv" timeout="60000"/>
+</TestStep>
+<TestStep id="_Di" name="checkImprintLinkAndPage">
+<ProcedureCall id="_Dj" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+</TestStep>
+<TestStep id="_D0" name="Click on Videos">
+<ProcedureCall id="_D1" procedure="Click support menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Videos_Menu_Item" event="MOUSE_MPRC" id="Videos_Menu_Item" modifiers="16" uid="_D2"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_D3" timeout="60000"/>
+</TestStep>
+<TestStep id="_Dk" name="checkImprintLinkAndPage">
+<ProcedureCall id="_Dl" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
 </TestStep>
 </TestCase>
-<TestCase id="_8i" name="testSolutionsFirstLevelPage">
-<TestStep id="_8j" name="Click on Test automation basics">
+<TestCase id="_B+" name="testSolutionPages">
+<TestStep id="_8j" name="Click on Test Automation Basics">
 <ProcedureCall id="_91" procedure="Click solutions menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Test_Auto_Basic_Menu_Item" event="MOUSE_MPRC" id="Test_Auto_Basic_Menu_Item" modifiers="16" uid="_8z"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_9E" timeout="60000"/>
 </TestStep>
-<TestStep id="_8l" name="checkLink">
-<ProcedureCall id="_B4" procedure="checkImprintLinkAndClick">
+<TestStep id="_D+" name="checkImprintLinkAndPage">
+<ProcedureCall id="_D-" procedure="Check Imprint Link and Page">
 <variable name="imprintText">Imprint</variable>
 </ProcedureCall>
-<ProcedureCall disabled="true" id="_9a" procedure="checkAndClickImprintLink"/>
 </TestStep>
-<TestStep id="_AV" name="checkPage">
-<ProcedureCall id="_AW" procedure="Check Imprint Page"/>
+<TestStep id="_E2" name="Click on Types Of Tests">
+<ProcedureCall id="_E3" procedure="Click solutions menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Types_Of_Tests_Menu_Item" event="MOUSE_MPRC" id="Types_Of_Tests_Menu_Item" modifiers="16" uid="_E4"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_E5" timeout="60000"/>
+</TestStep>
+<TestStep id="_E6" name="checkImprintLinkAndPage">
+<ProcedureCall id="_E7" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+</TestStep>
+<TestStep id="_EA" name="Click on Industries">
+<ProcedureCall id="_EB" procedure="Click solutions menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Industries_Menu_Item" event="MOUSE_MPRC" id="Industries_Menu_Item" modifiers="16" uid="_EC"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_ED" timeout="60000"/>
+</TestStep>
+<TestStep id="_EE" name="checkImprintLinkAndPage">
+<ProcedureCall id="_EF" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
 </TestStep>
 </TestCase>
-<TestCase id="_8N" name="testCompanyFirstLevelPage">
-<TestStep id="_8O" name="Click on Company">
+<TestCase id="_B-" name="testCompanyPages">
+<TestStep id="_8O" name="Click on About Us">
 <ProcedureCall id="_93" procedure="Click company menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="About_Us_Menu_Item" event="MOUSE_MPRC" id="About_Us_Menu_Item" modifiers="16" uid="_8K"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_8Z" timeout="60000"/>
 </TestStep>
-<TestStep id="_8Q" name="clickkLink">
-<ProcedureCall id="_B5" procedure="checkImprintLinkAndClick">
+<TestStep id="_EI" name="checkImprintLinkAndPage">
+<ProcedureCall id="_EJ" procedure="Check Imprint Link and Page">
 <variable name="imprintText">Imprint</variable>
 </ProcedureCall>
-<ProcedureCall disabled="true" id="_8R" procedure="checkAndClickImprintLink"/>
 </TestStep>
-<TestStep id="_AZ" name="checkPage">
-<ProcedureCall id="_Aa" procedure="Check Imprint Page"/>
+<TestStep id="_ER" name="Click on References">
+<ProcedureCall id="_ES" procedure="Click company menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="References_Menu_Item" event="MOUSE_MPRC" id="References_Menu_Item" modifiers="16" uid="_ET"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_EU" timeout="60000"/>
+</TestStep>
+<TestStep id="_EV" name="checkImprintLinkAndPage">
+<ProcedureCall id="_EW" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+</TestStep>
+<TestStep id="_EZ" name="Click on Partners">
+<ProcedureCall id="_Ea" procedure="Click company menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Partners_Menu_Item" event="MOUSE_MPRC" id="Partners_Menu_Item" modifiers="16" uid="_Eb"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_Ec" timeout="60000"/>
+</TestStep>
+<TestStep id="_Ed" name="checkImprintLinkAndPage">
+<ProcedureCall id="_Ee" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+</TestStep>
+<TestStep id="_Eh" name="Click on Jobs">
+<ProcedureCall id="_Ei" procedure="Click company menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Jobs_Menu_Item" event="MOUSE_MPRC" id="Jobs_Menu_Item" modifiers="16" uid="_Ej"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_Ek" timeout="60000"/>
+</TestStep>
+<TestStep id="_El" name="checkImprintLinkAndPage">
+<ProcedureCall id="_Em" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+</TestStep>
+<TestStep id="_Ep" name="Click on Contact">
+<ProcedureCall id="_Eq" procedure="Click company menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="Contact_Menu_Item" event="MOUSE_MPRC" id="Contact_Menu_Item" modifiers="16" uid="_Er"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_Es" timeout="60000"/>
+</TestStep>
+<TestStep id="_Et" name="checkImprintLinkAndPage">
+<ProcedureCall id="_Eu" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+</TestStep>
+<TestStep id="_Ex" name="Click on News">
+<ProcedureCall id="_Ey" procedure="Click company menu link"/>
+<MouseEventStep clicks="1" client="$(client)" component="News_Menu_Item" event="MOUSE_MPRC" id="News_Menu_Item" modifiers="16" uid="_Ez"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_E+" timeout="60000"/>
+</TestStep>
+<TestStep id="_E-" name="checkImprintLinkAndPage">
+<ProcedureCall id="_F0" procedure="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
 </TestStep>
 </TestCase>
 </TestSet>
 <PackageRoot id="_3">
-<Procedure id="_AI" name="Check Imprint Page">
-<CheckStringStep client="$(client)" component="h1Imprint" id="_AJ" predelay="5000">
+<Procedure id="_DL" name="Check Imprint Link and Page">
+<variable name="imprintText">Imprint</variable>
+<CheckStringStep client="$(client)" component="imprintLinkComponent" id="_DU">
+<text>$(imprintText)</text>
+</CheckStringStep>
+<MouseEventStep clicks="1" client="$(client)" component="imprintLinkComponent" event="MOUSE_MPRC" id="_DV" modifiers="16"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_DW" timeout="60000"/>
+<CheckStringStep client="$(client)" component="h1Imprint" id="_Db" predelay="5000">
 <text>Imprint</text>
 </CheckStringStep>
 </Procedure>
 <Procedure id="_8x" name="Click solutions menu link">
-<MouseEventStep clicks="1" client="$(client)" component="genericSolutionsLink" event="MOUSE_MPRC" id="genericSolutionsLink" modifiers="16" uid="_8y"/>
-<MouseEventStep clicks="1" client="$(client)" component="genericTestAutoBasicMenuItem" event="MOUSE_MPRC" id="genericTestAutoBasicMenuItem" modifiers="16"
-                uid="_8z"/>
-<DocumentWaiter client="$(client)" component="qfs.de" id="_9E" timeout="60000"/>
+<MouseEventStep clicks="1" client="$(client)" component="Solutions_Link" event="MOUSE_MPRC" id="Solutions_Link" modifiers="16" uid="_8y"/>
 </Procedure>
 <Procedure id="_8I" name="Click company menu link">
-<MouseEventStep clicks="1" client="$(client)" component="genericCompanyLink" event="MOUSE_MPRC" id="genericCompanyLink" modifiers="16" uid="_8J"/>
-<MouseEventStep clicks="1" client="$(client)" component="genericAboutUsMenuItem" event="MOUSE_MPRC" id="genericAboutUsMenuItem" modifiers="16" uid="_8K"/>
-<DocumentWaiter client="$(client)" component="qfs.de" id="_8Z" timeout="60000"/>
+<MouseEventStep clicks="1" client="$(client)" component="Company_Link" event="MOUSE_MPRC" id="genericCompanyLink" modifiers="16" uid="_8J"/>
 </Procedure>
 <Procedure id="_86" name="Click support menu link">
-<variable name="Documentation">Documentation</variable>
-<variable name="Support">Support</variable>
-<MouseEventStep clicks="1" client="$(client)" component="genericSupportLink" event="MOUSE_MPRC" id="genericSupportLink" modifiers="16" uid="_87"/>
-<MouseEventStep clicks="1" client="$(client)" component="genericDocumentationMenuItem" event="MOUSE_MPRC" id="genericDocumentationMenuItem" modifiers="16"
-                uid="_88"/>
-<DocumentWaiter client="$(client)" component="qfs.de" id="_8e" timeout="60000"/>
+<MouseEventStep clicks="1" client="$(client)" component="Support_Link" event="MOUSE_MPRC" id="Support_Link" modifiers="16" uid="_87"/>
 </Procedure>
 <Procedure id="_73" name="Click product menu link">
-<variable name="label">Product</variable>
-<variable name="label1">QF-Test</variable>
-<MouseEventStep clicks="1" client="$(client)" component="genericLink" event="MOUSE_MPRC" id="genericLink" modifiers="16" uid="_74"/>
-<MouseEventStep clicks="1" client="$(client)" component="genericMenuItem1" event="MOUSE_MPRC" id="genericMenuItem1" modifiers="16" uid="_7m"/>
-<DocumentWaiter client="$(client)" component="qfs.de" id="_7x" timeout="60000"/>
-</Procedure>
-<Procedure id="_c" name="clickImprintLink">
-<MouseEventStep clicks="1" client="$(client)" component="linkImprint" event="MOUSE_MPRC" id="_d" modifiers="16"/>
-</Procedure>
-<Procedure id="_X" name="checkAndClickImprintLink">
-<variable name="ImprintLinkText">Imprint</variable>
-<CheckStringStep client="$(client)" component="linkImprint" id="_W">
-<text>$(ImprintLinkText)</text>
-</CheckStringStep>
-<MouseEventStep clicks="1" client="$(client)" component="linkImprint" event="MOUSE_MPRC" id="_A8" modifiers="16"/>
-</Procedure>
-<Procedure id="_9X" name="checkImprintLinkAndClick">
-<variable name="imprintText">Imprint</variable>
-<CheckStringStep client="$(client)" component="imprintLinkComponent" id="_9Y">
-<text>$(imprintText)</text>
-</CheckStringStep>
-<MouseEventStep clicks="1" client="$(client)" component="imprintLinkComponent" event="MOUSE_MPRC" id="_Az" modifiers="16"/>
-<DocumentWaiter client="$(client)" component="qfs.de" id="_e" timeout="60000"/>
+<MouseEventStep clicks="1" client="$(client)" component="Product_Link" event="MOUSE_MPRC" id="genericLink" modifiers="16" uid="_74"/>
 </Procedure>
 </PackageRoot>
 <ExtraSequence id="_4">
@@ -230,48 +343,6 @@ resolvers.addResolver("ListItemTextResolver", getName)</code>
 <ClientScriptStep client="$(client)" id="_5E" name="GetAllResolvers">
 <code>print resolvers.listNames()</code>
 </ClientScriptStep>
-<BasicSequence id="_6r" name="Recorded 4/27/24, 12:55 PM">
-<ClientScriptStep client="$(client)" id="_6u" name="Test">
-<code># Import necessary modules
-
-# Define the XPath expression
-	
-com = rc.getComponent("genericHtml")# or rc.getComponent("genericDocument")
-xpath_expression = "//li//a[contains(text(),'Product')]"
-css_expression = "div[class='qfs-header'] li:nth-child(1) a:nth-child(1)"
-	
-res = com.getAllByXPath(rc.lookup(xpath_expression))
-# Find the element using XPath
-#element = find("/path/to/your/component", XPath(xpath_expression))
-
-# Perform actions on the found element
-res.click()  # For example, click on the element
-</code>
-</ClientScriptStep>
-</BasicSequence>
-<BasicSequence id="_6-" name="Recorded 4/28/24, 9:38 AM">
-<variable name="label">Product</variable>
-<variable name="label">QF-Test</variable>
-<MouseEventStep clicks="1" client="$(client)" component="genericLink" event="MOUSE_MPRC" id="genericLink" modifiers="16" uid="_7o"/>
-<MouseEventStep clicks="1" client="$(client)" component="genericMenuItem1" event="MOUSE_MPRC" id="1LevelMenuItem" modifiers="16" uid="_7n"/>
-</BasicSequence>
-<BasicSequence id="_7q" name="Recorded 4/28/24, 12:59 PM">
-<MouseEventStep clicks="1" client="$(client)" component="QF-Test...15" event="MOUSE_MPRC" id="_7r" modifiers="16"/>
-<DocumentWaiter client="$(client)" component="qfs.de" id="_7s" timeout="60000"/>
-</BasicSequence>
-<BasicSequence id="_97" name="Recorded 4/28/24, 4:38 PM">
-<MouseEventStep clicks="1" client="$(client)" component="#Support" event="MOUSE_MPRC" id="_9l" modifiers="16"/>
-<MouseEventStep clicks="1" client="$(client)" component="#Documentation" event="MOUSE_MPRC" id="_98" modifiers="16"/>
-<DocumentWaiter client="$(client)" component="qfs.de" id="_99" timeout="60000"/>
-</BasicSequence>
-<BasicSequence id="_9x" name="Recorded 4/28/24, 5:51 PM">
-<CheckStringStep client="$(client)" component="linkImprint2" id="_9y">
-<text>Imprint</text>
-</CheckStringStep>
-</BasicSequence>
-<BasicSequence id="_Am" name="Recorded 4/28/24, 6:55 PM">
-<WindowEventStep client="$(client)" component="qfs.de" event="WINDOW_CLOSING" id="_An"/>
-</BasicSequence>
 </ExtraSequence>
 <WindowList id="_5">
 <WebPageStep class="Window" feature="www.qfs.de" height="10423" id="qfs.de" uid="_4X" width="1535">
@@ -294,31 +365,120 @@ res.click()  # For example, click on the element
 <ComponentStep class="Link" id="imprintLinkComponent" uid="_Ao">
 <extrafeature name="qfs:label" negate="false" regexp="false" state="2">$(imprintText)</extrafeature>
 </ComponentStep>
-<ComponentStep class="Link" id="genericSolutionsLink" uid="_8-">
+<ComponentStep class="Link" id="Solutions_Link" uid="_8-">
 <extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://a[contains(text(),'Solutions')]}</extrafeature>
-<ComponentStep class="DIV" id="genericTestAutoBasicMenuItem" uid="_90">
+<ComponentStep class="DIV" id="Test_Auto_Basic_Menu_Item" uid="_90">
 <extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='Test automation basics']}</extrafeature>
 </ComponentStep>
+<ComponentStep class="DIV" id="Types_Of_Tests_Menu_Item" uid="_Dy">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='Types of tests']}</extrafeature>
 </ComponentStep>
-<ComponentStep class="Link" id="genericCompanyLink" uid="_8C">
+<ComponentStep class="DIV" id="Industries_Menu_Item" uid="_Dz">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='Industries']}</extrafeature>
+</ComponentStep>
+</ComponentStep>
+<ComponentStep class="Link" id="Company_Link" uid="_8C">
 <extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://a[contains(text(),'Company')]}</extrafeature>
-<ComponentStep class="DIV" id="genericAboutUsMenuItem" uid="_8D">
+<ComponentStep class="DIV" id="About_Us_Menu_Item" uid="_8D">
 <extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='About us']}</extrafeature>
 </ComponentStep>
+<ComponentStep class="DIV" id="References_Menu_Item" uid="_EK">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='References']}</extrafeature>
 </ComponentStep>
-<ComponentStep class="Link" id="genericSupportLink" uid="_89">
+<ComponentStep class="DIV" id="Partners_Menu_Item" uid="_EL">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='Partners']}</extrafeature>
+</ComponentStep>
+<ComponentStep class="DIV" id="Jobs_Menu_Item" uid="_EM">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='Jobs']}</extrafeature>
+</ComponentStep>
+<ComponentStep class="DIV" id="Contact_Menu_Item" uid="_EN">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='Contact']}</extrafeature>
+</ComponentStep>
+<ComponentStep class="DIV" id="News_Menu_Item" uid="_EO">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='News']}</extrafeature>
+</ComponentStep>
+</ComponentStep>
+<ComponentStep class="Link" id="Support_Link" uid="_89">
 <extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://a[contains(text(),'Support')]}</extrafeature>
-<extrafeature name="qfs:label" negate="false" regexp="false" state="2">$(Support)</extrafeature>
-<ComponentStep class="DIV" id="genericDocumentationMenuItem" uid="_8A">
+<extrafeature name="qfs:label" negate="false" regexp="false" state="2">Support</extrafeature>
+<ComponentStep class="DIV" id="Documentation_MenuI_Item" uid="_8A">
 <extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://li//div[contains(text(),'Documentation')]}</extrafeature>
-<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">$(Documentation)</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">Documentation</extrafeature>
+</ComponentStep>
+<ComponentStep class="DIV" id="Product_Support_MenuI_Item" uid="_Ch">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://li//div[contains(text(),'Product support')]}</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">Product support</extrafeature>
+</ComponentStep>
+<ComponentStep class="DIV" id="Training_Menu_Item" uid="_Cr">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://li//div[contains(text(),'Training &amp; Consulting')]}</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">Training &amp; Consulting</extrafeature>
+</ComponentStep>
+<ComponentStep class="DIV" id="Videos_Menu_Item" uid="_C-">
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://li//div[contains(text(),'Videos')]}</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">Videos</extrafeature>
 </ComponentStep>
 </ComponentStep>
-<ComponentStep class="Link" id="genericLink" uid="_7O">
-<extrafeature name="qfs:label" negate="false" regexp="false" state="2">$(label)</extrafeature>
-<ComponentStep class="DIV" id="genericMenuItem1" uid="_7h">
+<ComponentStep class="Link" id="Product_Link" uid="_7O">
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="2">Link</extrafeature>
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://a[@class='list-item-a'][normalize-space()='Product']}</extrafeature>
+<extrafeature name="qfs:label" negate="false" regexp="false" state="2">Product</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="2">Product</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">Product</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="2">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="2">A</extrafeature>
+<ComponentStep class="DIV" id="QF_Test_Menu_Item" uid="_7h">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="2">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="2">Link</extrafeature>
 <extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='QF-Test']}</extrafeature>
-<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">$(label1)</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="2">QF-Test</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">QF-Test</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="2">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="2">A</extrafeature>
+</ComponentStep>
+<ComponentStep class="DIV" id="Download_Menu_Item" uid="_BJ">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="2">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="2">Link</extrafeature>
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='Download']}</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="2">Download</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">Download</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="2">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="2">A</extrafeature>
+</ComponentStep>
+<ComponentStep class="DIV" id="Pricing_Menu_Item" uid="_C1">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="2">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="2">Link</extrafeature>
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='Pricing']}</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="2">Pricing</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">Pricing</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="2">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="2">A</extrafeature>
+</ComponentStep>
+<ComponentStep class="DIV" id="FAQ_Menu_Item" uid="_CB">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="2">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="2">Link</extrafeature>
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='FAQ']}</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="2">FAQ</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">FAQ</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="2">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="2">A</extrafeature>
+</ComponentStep>
+<ComponentStep class="DIV" id="Release_Notes_Menu_Item" uid="_CL">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="2">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="2">Link</extrafeature>
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='Release Notes &amp; Roadmap']}</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="2">Release Notes &amp; Roadmap</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">Release Notes &amp; Roadmap</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="2">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="2">A</extrafeature>
+</ComponentStep>
+<ComponentStep class="DIV" id="Getting_Started_Menu_Item" uid="_CV">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="2">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="2">Link</extrafeature>
+<extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://div[normalize-space()='Get started']}</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="2">Get started</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">Get started</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="2">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="2">A</extrafeature>
 </ComponentStep>
 </ComponentStep>
 <ComponentStep class="UL" classcount="20" classindex="17" height="32" id="qfs.de.ul" uid="_S" width="149" x="20" y="7969">
@@ -751,6 +911,45 @@ res.click()  # For example, click on the element
 <extrafeature name="qfs:class" negate="false" regexp="false" state="0">H1</extrafeature>
 <extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">H1</extrafeature>
 <extrafeature name="tag" negate="false" regexp="false" state="0">H1</extrafeature>
+</ComponentStep>
+<ComponentStep class="UL" classcount="12" classindex="5" height="20" id="qfs.de.ul10" uid="_BA" width="258" x="199" y="2177">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">UL</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">UL</extrafeature>
+<ComponentStep class="LI" classcount="1" classindex="0" height="20" id="qfs.de.liImprint3" uid="_BB" width="258" x="0" y="0">
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Imprint</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Imprint</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
+<ComponentStep class="Link" classcount="1" classindex="0" feature="Imprint" height="20" id="linkImprint3" uid="_BC" width="258" x="0" y="0">
+<extrafeature name="href" negate="false" regexp="false" state="0">https://www.qfs.de/en/company/imprint.html</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Link</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Imprint</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">Imprint</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">A</extrafeature>
+</ComponentStep>
+</ComponentStep>
+</ComponentStep>
+<ComponentStep class="Link" classcount="4" classindex="0" feature="https://www.qfs.de/en/index.html" height="119" id="linkHttps://www.qfs.de/en/index.html"
+               uid="_G5" width="180" x="199" y="53">
+<extrafeature name="href" negate="false" regexp="false" state="0">https://www.qfs.de/en/index.html</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Link</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">A</extrafeature>
+</ComponentStep>
+<ComponentStep class="Link" classcount="22" classindex="19" feature="ACCEPT" height="47" id="ACCEPT_Link" uid="_G6" width="131" x="279" y="581">
+<extrafeature name="class" negate="false" regexp="false" state="0">link--accept button-default-bordered-green-arrow</extrafeature>
+<extrafeature name="href" negate="false" regexp="false" state="0">https://www.qfs.de/en/index.html</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Link</extrafeature>
+<extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">ACCEPT</extrafeature>
+<extrafeature name="qfs:labelText" negate="false" regexp="false" state="1">ACCEPT</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="0">A</extrafeature>
 </ComponentStep>
 </ComponentStep>
 </ComponentStep>
