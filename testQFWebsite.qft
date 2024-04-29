@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE RootStep>
-<RootStep id="_0" indentation="0" linelength="160" name="root" signature="74FF38C01CDEAAE3F05B6BA4B7FB47E86F567039" version="7.1.3">
+<RootStep id="_0" indentation="0" linelength="160" name="root" signature="75FAEADC69FE8157CCD70D50840960E7ED7B1BEB" version="7.1.3">
 <include>qfs.qft</include>
 <reference>qfs.qft</reference>
 <TestSet id="_1" name="verifyGoToImprintPage">
@@ -89,7 +89,10 @@ For additional information and examples, use "What's this?" in the step's contex
 </Dependency>
 <TestCase id="_v" name="testLandingPage">
 <TestStep id="_1B" name="checkLink">
-<ProcedureCall id="_1C" procedure="checkAndClickImprintLink"/>
+<ProcedureCall id="_B6" procedure="checkImprintLinkAndClick">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+<ProcedureCall disabled="true" id="_1C" procedure="checkAndClickImprintLink"/>
 </TestStep>
 <TestStep id="_1D" name="checkPage">
 <ProcedureCall id="_AK" procedure="Check Imprint Page"/>
@@ -103,32 +106,38 @@ For additional information and examples, use "What's this?" in the step's contex
 </ProcedureCall>
 </TestStep>
 <TestStep id="_V" name="checkLink">
-<ProcedureCall id="_Y" procedure="checkAndClickImprintLink"/>
+<ProcedureCall id="_B7" procedure="checkImprintLinkAndClick">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+<ProcedureCall disabled="true" id="_Y" procedure="checkAndClickImprintLink"/>
 </TestStep>
 <TestStep id="_AN" name="checkPage">
 <ProcedureCall id="_AO" procedure="Check Imprint Page"/>
 </TestStep>
 </TestCase>
-<TestCase disabled="true" id="_7-" name="testSupportFirstLevelPage" postdelay="5000">
+<TestCase id="_7-" name="testSupportFirstLevelPage" postdelay="5000">
 <TestStep id="_80" name="Click on Documentation">
 <ProcedureCall id="_8f" procedure="Click support menu link"/>
 </TestStep>
 <TestStep id="_9f" name="checkLink">
-<ProcedureCall disabled="true" id="_9z" procedure="checkImprintLink2">
-<variable name="ImprintLinkText">Imprint</variable>
+<ProcedureCall id="_9z" procedure="checkImprintLinkAndClick">
+<variable name="imprintText">Imprint</variable>
 </ProcedureCall>
-<ProcedureCall id="_9g" procedure="checkAndClickImprintLink"/>
+<ProcedureCall disabled="true" id="_9g" procedure="checkAndClickImprintLink"/>
 </TestStep>
 <TestStep id="_AR" name="checkPage">
 <ProcedureCall id="_AS" procedure="Check Imprint Page"/>
 </TestStep>
 </TestCase>
-<TestCase disabled="true" id="_8i" name="testSolutionsFirstLevelPage">
+<TestCase id="_8i" name="testSolutionsFirstLevelPage">
 <TestStep id="_8j" name="Click on Test automation basics">
 <ProcedureCall id="_91" procedure="Click solutions menu link"/>
 </TestStep>
 <TestStep id="_8l" name="checkLink">
-<ProcedureCall id="_9a" procedure="checkAndClickImprintLink"/>
+<ProcedureCall id="_B4" procedure="checkImprintLinkAndClick">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+<ProcedureCall disabled="true" id="_9a" procedure="checkAndClickImprintLink"/>
 </TestStep>
 <TestStep id="_AV" name="checkPage">
 <ProcedureCall id="_AW" procedure="Check Imprint Page"/>
@@ -139,7 +148,10 @@ For additional information and examples, use "What's this?" in the step's contex
 <ProcedureCall id="_93" procedure="Click company menu link"/>
 </TestStep>
 <TestStep id="_8Q" name="clickkLink">
-<ProcedureCall id="_8R" procedure="checkAndClickImprintLink"/>
+<ProcedureCall id="_B5" procedure="checkImprintLinkAndClick">
+<variable name="imprintText">Imprint</variable>
+</ProcedureCall>
+<ProcedureCall disabled="true" id="_8R" procedure="checkAndClickImprintLink"/>
 </TestStep>
 <TestStep id="_AZ" name="checkPage">
 <ProcedureCall id="_Aa" procedure="Check Imprint Page"/>
@@ -180,7 +192,6 @@ For additional information and examples, use "What's this?" in the step's contex
 </Procedure>
 <Procedure id="_c" name="clickImprintLink">
 <MouseEventStep clicks="1" client="$(client)" component="linkImprint" event="MOUSE_MPRC" id="_d" modifiers="16"/>
-<DocumentWaiter client="$(client)" component="qfs.de" id="_e" timeout="60000"/>
 </Procedure>
 <Procedure id="_X" name="checkAndClickImprintLink">
 <variable name="ImprintLinkText">Imprint</variable>
@@ -189,11 +200,13 @@ For additional information and examples, use "What's this?" in the step's contex
 </CheckStringStep>
 <MouseEventStep clicks="1" client="$(client)" component="linkImprint" event="MOUSE_MPRC" id="_A8" modifiers="16"/>
 </Procedure>
-<Procedure id="_9X" name="checkImprintLink2">
-<variable name="ImprintLinkText">Imprint</variable>
-<CheckStringStep client="$(client)" component="linkImprint2" id="_9Y">
-<text>$(ImprintLinkText)</text>
+<Procedure id="_9X" name="checkImprintLinkAndClick">
+<variable name="imprintText">Imprint</variable>
+<CheckStringStep client="$(client)" component="imprintLinkComponent" id="_9Y">
+<text>$(imprintText)</text>
 </CheckStringStep>
+<MouseEventStep clicks="1" client="$(client)" component="imprintLinkComponent" event="MOUSE_MPRC" id="_Az" modifiers="16"/>
+<DocumentWaiter client="$(client)" component="qfs.de" id="_e" timeout="60000"/>
 </Procedure>
 </PackageRoot>
 <ExtraSequence id="_4">
@@ -278,6 +291,9 @@ res.click()  # For example, click on the element
 <extrafeature name="qfs:class" negate="false" regexp="false" state="0">BODY</extrafeature>
 <extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">BODY</extrafeature>
 <extrafeature name="tag" negate="false" regexp="false" state="0">BODY</extrafeature>
+<ComponentStep class="Link" id="imprintLinkComponent" uid="_Ao">
+<extrafeature name="qfs:label" negate="false" regexp="false" state="2">$(imprintText)</extrafeature>
+</ComponentStep>
 <ComponentStep class="Link" id="genericSolutionsLink" uid="_8-">
 <extrafeature name="qfs:item" negate="false" regexp="false" state="2">@:xpath=${quoteitem://a[contains(text(),'Solutions')]}</extrafeature>
 <ComponentStep class="DIV" id="genericTestAutoBasicMenuItem" uid="_90">

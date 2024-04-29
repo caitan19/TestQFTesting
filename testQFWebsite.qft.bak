@@ -317,14 +317,14 @@ res.click()  # For example, click on the element
 <extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">LI</extrafeature>
 <extrafeature name="tag" negate="false" regexp="false" state="0">LI</extrafeature>
 <ComponentStep class="Link" classcount="1" classindex="0" feature="Imprint" height="22" id="linkImprint" uid="_U" width="60" x="0" y="5">
-<extrafeature name="href" negate="false" regexp="false" state="0">https://www.qfs.de/en/company/imprint.html</extrafeature>
-<extrafeature name="qfs:class" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="href" negate="false" regexp="false" state="1">/en/company/imprint.html</extrafeature>
+<extrafeature name="qfs:class" negate="false" regexp="false" state="1">SPAN</extrafeature>
 <extrafeature name="qfs:genericclass" negate="false" regexp="false" state="0">Link</extrafeature>
-<extrafeature name="qfs:item" negate="false" regexp="false" state="0">@:xpath=${quoteitem://div[normalize-space()='Imprint']}</extrafeature>
+<extrafeature name="qfs:item" negate="false" regexp="false" state="1">@:xpath=${quoteitem://span[text()='Imprint']}</extrafeature>
 <extrafeature name="qfs:labelBest" negate="false" regexp="false" state="0">Imprint</extrafeature>
 <extrafeature name="qfs:labelText" negate="false" regexp="false" state="2">Imprint</extrafeature>
-<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">A</extrafeature>
-<extrafeature name="tag" negate="false" regexp="false" state="0">A</extrafeature>
+<extrafeature name="qfs:systemclass" negate="false" regexp="false" state="0">SPAN</extrafeature>
+<extrafeature name="tag" negate="false" regexp="false" state="1">SPAN</extrafeature>
 </ComponentStep>
 </ComponentStep>
 </ComponentStep>
